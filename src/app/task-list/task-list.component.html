@@ -1,0 +1,29 @@
+<div class="task-list d-flex flex-column align-items-center">
+    <h1>Liste des tâches</h1>
+
+    <div class="mb-3 d-flex">
+        <label for=" addTask" class="form-label">Ajouter une tâche</label>
+        <input id="addTask" class="form-control" [(ngModel)]="newTaskTitle" placeholder="Nom de la tâche"
+            class="mb-2" />
+        <button class="btn btn-primary mb-3" (click)="addTask() ">Ajouter</button>
+    </div>
+
+    <ul class="list-group w-100" style="max-width: 600px;">
+        <li class="list-group-item" *ngFor="let task of tasks">
+            <div class="form-check d-flex align-items-center justify-content-between">
+                <div>
+                    <input class="form-check-input" type="checkbox" [(ngModel)]="task.completed"
+                        (change)="toggleTaskCompletion(task)" />
+                    <label class="form-check-label" [ngClass]="{ 'text-decoration-line-through': task.completed }">
+                        {{ task.title }}
+                    </label>
+                </div>
+                <div>
+                    <button class="btn btn-danger me-2" (click)="deleteTask(task.id)">Supprimer</button>
+                    <input [(ngModel)]="task.title" placeholder="Modifier la tâche" class="me-2" />
+                    <button class="btn btn-secondary" (click)="updateTask(task)">Sauvegarder</button>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
